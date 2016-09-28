@@ -1,0 +1,56 @@
+{
+    "name": "ppx_deriving-actual",
+    "exportedEnvVars": {
+        "ppx_deriving_enable": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "enable"
+        },
+        "ppx_deriving_version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "4.0.0"
+        },
+        "FINDLIB": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/lib"
+        },
+        "version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "4.0.0"
+        },
+        "ppx_deriving_installed": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "true"
+        },
+        "PATH": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/bin"
+        }
+    },
+    "version": "4.0.0",
+    "dependencies": {
+        "@opam-alpha/ounit": "*",
+        "@opam-alpha/ocamlfind": ">= 1.6.0",
+        "dependency-env": "https://github.com/npm-ml/dependency-env.git",
+        "substs": "https://github.com/yunxing/substs.git",
+        "@opam-alpha/ocamlbuild": "*",
+        "@opam-alpha/result": "*",
+        "@opam-alpha/ppx_tools": ">= 4.02.3",
+        "@opam-alpha/cppo": ">= 1.2.2",
+        "nopam": "https://github.com/yunxing/nopam.git",
+        "opam-installer-bin": "https://github.com/yunxing/opam-installer-bin.git"
+    },
+    "scripts": {
+        "postinstall": "eval $(dependencyEnv) && nopam && substs pkg/META.in && ocaml pkg/build.ml native=true native-dynlink=true && (opam-installer --prefix=$opam_prefix || true)"
+    },
+    "peerDependencies": {
+        "@opam-alpha/ocaml": ">= 4.02.1"
+    }
+}
